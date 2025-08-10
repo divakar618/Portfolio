@@ -1,0 +1,1466 @@
+Dark mode of my resume 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Divakar R | AI/ML Engineer Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* Custom dark theme */
+    body {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      transition: background-color 0.5s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* Modern glassmorphism effect */
+    .glass {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.5);
+    }
+    
+    /* Network background styling */
+    .network-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .network-node {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(99, 102, 241, 0.15);
+      animation: pulse 4s infinite;
+    }
+    
+    .network-line {
+      position: absolute;
+      background: linear-gradient(to right, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+      transform-origin: 0 0;
+    }
+    
+    /* Custom animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+    
+    @keyframes node-float {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(5px, -5px); }
+      50% { transform: translate(0, 5px); }
+      75% { transform: translate(-5px, 0); }
+    }
+    
+    .profile-pic {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      animation: float 5s ease-in-out infinite;
+      border: 4px solid rgba(99, 102, 241, 0.5);
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(to right, #6366f1, #8b5cf6);
+    }
+    
+    .skill-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .skill-icon:hover {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.7));
+    }
+    
+    .project-card {
+      transition: all 0.4s ease;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
+      border-color: rgba(99, 102, 241, 0.5);
+    }
+    
+    .timeline-dot {
+      transition: all 0.3s ease;
+    }
+    
+    .timeline-dot:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.7);
+    }
+    
+    .certificate-card {
+      transition: all 0.3s ease;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .certificate-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+    
+    .contact-btn {
+      transition: all 0.3s ease;
+    }
+    
+    .contact-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
+    }
+    
+    .nav-link {
+      position: relative;
+      padding-bottom: 5px;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .theme-switch {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #4f46e5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .theme-switch:hover {
+      transform: rotate(30deg) scale(1.1);
+    }
+    
+    .scroll-top {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 99;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #4f46e5;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .scroll-top:hover {
+      background: #6366f1;
+      transform: translateY(-3px);
+    }
+    
+    /* Particle background */
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.3;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Section backgrounds */
+    .section-bg {
+      position: relative;
+      overflow: hidden;
+      padding: 5rem 0;
+    }
+    
+    .section-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background-color: #1e293b;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 700px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #8b5cf6;
+      transition: all 0.3s ease;
+    }
+    
+    .close-modal:hover {
+      color: #6366f1;
+      transform: scale(1.1);
+    }
+    
+    /* New section styles */
+    .achievement-card {
+      transition: all 0.3s ease;
+      border-left: 4px solid #6366f1;
+    }
+    
+    .achievement-card:hover {
+      transform: translateY(-5px);
+      border-left-color: #8b5cf6;
+    }
+    
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    
+    .tech-tag {
+      background: rgba(99, 102, 241, 0.15);
+      color: #c7d2fe;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 5px;
+      background: linear-gradient(to right, #6366f1, #8b5cf6);
+      border-radius: 2px;
+    }
+    
+    /* Animation delays */
+    .delay-100 {
+      animation-delay: 0.1s;
+    }
+    
+    .delay-200 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-300 {
+      animation-delay: 0.3s;
+    }
+    
+    /* Terminal effect */
+    .terminal {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+      font-family: 'Courier New', monospace;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    
+    .terminal-header {
+      position: absolute;
+      top: 12px;
+      left: 15px;
+      display: flex;
+      gap: 8px;
+    }
+    
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+    
+    .terminal-content {
+      margin-top: 30px;
+      overflow: hidden;
+    }
+    
+    .terminal-line {
+      margin: 5px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #6366f1;
+      animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #6366f1; }
+    }
+    
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(to right, #6366f1, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Floating effect for sections */
+    .section-float {
+      animation: float-section 12s ease-in-out infinite;
+    }
+    
+    @keyframes float-section {
+      0%, 100% { transform: translateY(0) rotate(0.5deg); }
+      25% { transform: translateY(-10px) rotate(-0.5deg); }
+      50% { transform: translateY(0) rotate(0.5deg); }
+      75% { transform: translateY(10px) rotate(-0.5deg); }
+    }
+    
+    /* Tech wave divider */
+    .wave-divider {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      transform: rotate(180deg);
+    }
+    
+    .wave-divider svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 100px;
+    }
+    
+    .wave-divider .shape-fill {
+      fill: #0f172a;
+    }
+    
+    /* Floating nodes animation */
+    @keyframes node-float {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(5px, -5px); }
+      50% { transform: translate(0, 5px); }
+      75% { transform: translate(-5px, 0); }
+    }
+    
+    /* Holographic effect */
+    .holographic {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .holographic::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.03) 30%,
+        rgba(255, 255, 255, 0.06) 50%,
+        rgba(255, 255, 255, 0.03) 70%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 4s infinite linear;
+      z-index: 0;
+    }
+    
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(30deg); }
+      100% { transform: translateX(100%) rotate(30deg); }
+    }
+    
+    /* Glowing border effect */
+    .glow-border {
+      position: relative;
+    }
+    
+    .glow-border::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899, #6366f1);
+      background-size: 400% 400%;
+      border-radius: inherit;
+      z-index: -1;
+      animation: glow 3s ease infinite;
+      filter: blur(5px);
+      opacity: 0.7;
+    }
+    
+    @keyframes glow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .flow-step::after {
+        display: none;
+      }
+      
+      .flow-connector {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 0.5rem 0;
+        color: #4f46e5;
+        font-size: 1.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .profile-pic {
+        width: 200px;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+  <!-- Global particle container -->
+  <div id="particles-js" class="particles-container"></div>
+  
+  <!-- Navigation -->
+  <header class="gradient-bg sticky top-0 z-50 shadow-md glass">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="flex justify-between items-center py-4">
+        <div class="text-xl font-bold text-white flex items-center">
+          <i class="fas fa-brain mr-2"></i> Divakar R
+        </div>
+        <div class="flex space-x-6">
+          <a href="#about" class="nav-link text-white">About</a>
+          <a href="#education" class="nav-link text-white">Education</a>
+          <a href="#internship" class="nav-link text-white">Internship</a>
+          <a href="#projects" class="nav-link text-white">Projects</a>
+          <a href="#skills" class="nav-link text-white">Skills</a>
+          <a href="#certificates" class="nav-link text-white">Certificates</a>
+          <a href="#contact" class="nav-link text-white">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="text-white py-16 relative overflow-hidden section-bg hero-section">
+    <div class="network-container" id="hero-network"></div>
+    <div class="max-w-5xl mx-auto flex flex-col items-center text-center px-4 hero-content">
+      <div class="relative mb-8">
+        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 blur-xl opacity-40 animate-pulse"></div>
+        <img src="C:\Users\SEC\Downloads\Divakar_Portfolio_Complete\profile.jpg" 
+             alt="Divakar R" 
+             class="w-64 h-64 rounded-full profile-pic object-cover relative">
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-2 mt-6 animate_animated animate_fadeInDown">Divakar R</h1>
+      <div class="terminal max-w-md w-full mt-6">
+        <div class="terminal-header">
+          <div class="terminal-dot dot-red"></div>
+          <div class="terminal-dot dot-yellow"></div>
+          <div class="terminal-dot dot-green"></div>
+        </div>
+        <div class="terminal-content">
+          <div class="terminal-line">$ whoami</div>
+          <div class="terminal-line">> Aspiring Machine Learning Engineer</div>
+          <div class="terminal-line">> Tech Enthusiast</div>
+          <div class="terminal-line">> AI Solutions Developer</div>
+        </div>
+      </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-4 animate_animated animatefadeInUp animate_delay-2s"> 
+        <a href="mailto:divak5781117@gmail.com" class="contact-btn bg-indigo-600 text-white font-semibold px-4 py-2 rounded flex items-center glass">
+          <i class="fas fa-envelope mr-2"></i> Email Me
+        </a>
+        <a href="https://www.linkedin.com/in/divakar-r-6b396a256/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="contact-btn bg-indigo-600 text-white font-semibold px-4 py-2 rounded flex items-center glass">
+          <i class="fab fa-linkedin mr-2"></i> LinkedIn
+        </a>
+        <a href="https://github.com/divakar618" class="contact-btn bg-indigo-600 text-white font-semibold px-4 py-2 rounded flex items-center glass">
+          <i class="fab fa-github mr-2"></i> GitHub
+        </a>
+        <a href="C:\Users\SEC\Downloads\Divakar_Portfolio_Complete\Divakar_Og_resume.pdf" class="contact-btn bg-transparent border-2 border-indigo-500 text-white font-semibold px-4 py-2 rounded flex items-center glass">
+          <i class="fas fa-download mr-2"></i> Resume
+        </a>
+      </div>
+      <div class="mt-12 animate_animated animatefadeInUp animate_delay-3s">
+        <a href="#projects" class="inline-flex items-center text-indigo-300 hover:text-white transition">
+          <span>Explore My Work</span>
+          <i class="fas fa-arrow-down ml-2 animate-bounce"></i>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Wave divider -->
+    <div class="wave-divider">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+          <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+          <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- About Me -->
+  <section id="about" class="section-bg">
+    <div class="network-container" id="about-network"></div>
+    <div class="max-w-4xl mx-auto px-4 text-center relative z-10 py-16">
+      <h2 class="section-title text-3xl font-bold text-indigo-400 mb-4">About Me</h2>
+      <div class="glass p-8 rounded-2xl shadow-xl max-w-3xl mx-auto">
+        <p class="text-gray-300 text-lg mb-6">
+          I'm a B.Tech AI & ML student at Saveetha Engineering College with hands-on experience in machine learning and real-time AI projects.
+          Passionate about innovation, teamwork, and using technology to solve real-world challenges.
+        </p>
+        
+        <div class="flow-diagram">
+          <div class="flow-step glow-border">
+            <div class="w-12 h-12 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-brain text-indigo-400 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Problem Analysis</h3>
+            <p class="text-indigo-300 text-sm mt-2">Identifying real-world challenges</p>
+          </div>
+          <div class="flow-connector">→</div>
+          
+          <div class="flow-step glow-border">
+            <div class="w-12 h-12 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-cogs text-indigo-400 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Solution Design</h3>
+            <p class="text-indigo-300 text-sm mt-2">Creating AI/ML strategies</p>
+          </div>
+          <div class="flow-connector">→</div>
+          
+          <div class="flow-step glow-border">
+            <div class="w-12 h-12 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-code text-indigo-400 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Implementation</h3>
+            <p class="text-indigo-300 text-sm mt-2">Developing & training models</p>
+          </div>
+          <div class="flow-connector">→</div>
+          
+          <div class="flow-step glow-border">
+            <div class="w-12 h-12 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-rocket text-indigo-400 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Deployment</h3>
+            <p class="text-indigo-300 text-sm mt-2">Real-world application</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 max-w-4xl mx-auto">
+        <div class="glass p-6 rounded-xl">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-indigo-900 rounded-full flex items-center justify-center mr-3">
+              <i class="fas fa-brain text-indigo-400"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-white">Technical Expertise</h3>
+          </div>
+          <p class="text-gray-300 text-left">
+            Proficient in Python, Java, and deep learning frameworks like TensorFlow & Keras. Strong foundation in computer vision, NLP, and cloud integration (AWS). Experienced in developing AI models optimized for edge devices.
+          </p>
+        </div>
+        
+        <div class="glass p-6 rounded-xl">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-indigo-900 rounded-full flex items-center justify-center mr-3">
+              <i class="fas fa-trophy text-indigo-400"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-white">Achievements</h3>
+          </div>
+          <p class="text-gray-300 text-left">
+            Winner of ML-based symposium and active participant in technical hackathons. Completed machine learning internship at Arjun Vision Tech Solutions with hands-on experience in real-world ML applications.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" class="section-bg">
+    <div class="network-container" id="education-network"></div>
+    <div class="max-w-5xl mx-auto px-4 relative z-10 py-16">
+      <h2 class="section-title text-3xl font-bold text-center text-indigo-400 mb-12">Education</h2>
+
+      <div class="relative border-l-4 border-indigo-500 pl-6 space-y-10">
+        <!-- College -->
+        <div class="group relative glass p-6 rounded-xl">
+          <div class="absolute -left-3 top-1 w-6 h-6 bg-indigo-500 rounded-full border-4 border-gray-900 shadow-lg timeline-dot"></div>
+          <div>
+            <h3 class="text-xl font-semibold text-white">B.Tech in Artificial Intelligence & Machine Learning</h3>
+            <p class="text-sm text-indigo-400 font-medium">Saveetha Engineering College, Chennai</p>
+            <p class="text-indigo-300 mt-1">2022 – 2026</p>
+            <p class="mt-2 text-gray-300">Currently pursuing a Bachelor's degree with a strong foundation in AI, ML, and Deep Learning. Engaged in research-based and project-driven learning environments.</p>
+            <div class="mt-3">
+              <div class="flex justify-between">
+                <span class="text-sm font-medium text-gray-300">Progress</span>
+                <span class="text-sm font-medium text-indigo-400">79%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-2.5 mt-1">
+                <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 79%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- School -->
+        <div class="group relative glass p-6 rounded-xl">
+          <div class="absolute -left-3 top-1 w-6 h-6 bg-indigo-500 rounded-full border-4 border-gray-900 shadow-lg timeline-dot"></div>
+          <div>
+            <h3 class="text-xl font-semibold text-white">Higher Secondary Certificate (HSC)</h3>
+            <p class="text-sm text-indigo-400 font-medium">Karthigeyan Matriculation Hr. Sec. School, Chennai</p>
+            <p class="text-indigo-300 mt-1">Completed in 2022</p>
+            <p class="mt-2 text-gray-300">Completed senior secondary education with a focus on mathematics, physics, and computer science. Developed foundational skills in problem-solving and analytical thinking.</p>
+            <div class="mt-3">
+              <div class="flex justify-between">
+                <span class="text-sm font-medium text-gray-300">Score</span>
+                <span class="text-sm font-medium text-indigo-400">86%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-2.5 mt-1">
+                <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 86%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Internship -->
+  <section id="internship" class="section-bg">
+    <div class="network-container" id="internship-network"></div>
+    <div class="max-w-5xl mx-auto px-4 text-center relative z-10 py-16">
+      <h2 class="section-title text-3xl font-bold text-indigo-400 mb-10">Internship</h2>
+
+      <div class="flex flex-col md:flex-row items-center gap-6 glass p-6 rounded-xl shadow hover:shadow-xl transition">
+        <div class="flex-shrink-0">
+          <div class="w-20 h-20 bg-indigo-600 text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-md">
+            <i class="fas fa-robot"></i>
+          </div>
+        </div>
+        <div class="text-left">
+          <h3 class="text-xl font-semibold text-white">Machine Learning Intern</h3>
+          <p class="text-sm text-indigo-400">Arjun Vision Tech Solutions — August 2024</p>
+          <p class="mt-2 text-gray-300">
+            During my internship, I worked on solving real-world ML problems with a focus on deploying machine learning models and improving algorithm performance. My responsibilities included:
+          </p>
+          <ul class="list-disc list-inside mt-2 text-gray-300 space-y-1">
+            <li>Developing and optimizing deep learning models for computer vision applications</li>
+            <li>Implementing feature extraction techniques for improved model accuracy</li>
+            <li>Creating edge AI solutions for resource-constrained environments</li>
+            <li>Collaborating with the team to deploy models in production environments</li>
+          </ul>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-indigo-900 text-indigo-300 rounded-full text-sm">Deep Learning</span>
+            <span class="px-3 py-1 bg-indigo-900 text-indigo-300 rounded-full text-sm">Model Deployment</span>
+            <span class="px-3 py-1 bg-indigo-900 text-indigo-300 rounded-full text-sm">Feature Extraction</span>
+            <span class="px-3 py-1 bg-indigo-900 text-indigo-300 rounded-full text-sm">Edge AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section-bg">
+    <div class="network-container" id="projects-network"></div>
+    <div class="max-w-5xl mx-auto px-4 relative z-10 py-16">
+      <h2 class="section-title text-3xl font-bold text-center text-indigo-400 mb-10">Projects</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        
+        <!-- Project 1 -->
+        <div class="project-card glass p-6 rounded-xl">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-indigo-900 rounded-full flex items-center justify-center mr-3">
+              <i class="fas fa-shield-alt text-indigo-400 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Violence Detection with MobileNetV2</h3>
+          </div>
+          <p class="text-gray-300 mb-4">Built a real-time system using deep learning to detect violent behavior using MobileNetV2. The system can analyze video streams and alert security personnel when violence is detected.</p>
+          
+          <div class="flow-diagram">
+            <div class="flow-step">
+              <i class="fas fa-video text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Input Video</p>
+            </div>
+            <div class="flow-connector">→</div>
+            
+            <div class="flow-step">
+              <i class="fas fa-brain text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">MobileNetV2</p>
+            </div>
+            <div class="flow-connector">→</div>
+            
+            <div class="flow-step">
+              <i class="fas fa-bell text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Alert System</p>
+            </div>
+          </div>
+          
+          <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">TensorFlow</span>
+            <span class="tech-tag">OpenCV</span>
+            <span class="tech-tag">MobileNetV2</span>
+          </div>
+          <div class="mt-6 flex gap-3">
+            <button class="view-demo-btn bg-indigo-600 text-white px-4 py-2 rounded text-sm hover:bg-indigo-700 transition" data-project="1">
+              <i class="fas fa-eye mr-2"></i>View Demo
+            </button>
+            <a href="https://github.com/divakar618/violence-detection" class="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm hover:bg-gray-700 transition flex items-center">
+              <i class="fab fa-github mr-2"></i> Source Code
+            </a>
+          </div>
+        </div>
+        
+        <!-- Project 2 -->
+        <div class="project-card glass p-6 rounded-xl">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-indigo-900 rounded-full flex items-center justify-center mr-3">
+              <i class="fas fa-magic text-indigo-400 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Convolutional Denoising Autoencoder</h3>
+          </div>
+          <p class="text-gray-300 mb-4">Denoised and reconstructed MNIST digits using autoencoders. This project won 1st prize at a technical symposium for its innovative approach to image denoising.</p>
+          
+          <div class="flow-diagram">
+            <div class="flow-step">
+              <i class="fas fa-image text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Noisy Input</p>
+            </div>
+            <div class="flow-connector">→</div>
+            
+            <div class="flow-step">
+              <i class="fas fa-project-diagram text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Encoder</p>
+            </div>
+            <div class="flow-connector">→</div>
+            
+            <div class="flow-step">
+              <i class="fas fa-expand-arrows-alt text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Decoder</p>
+            </div>
+            <div class="flow-connector">→</div>
+            
+            <div class="flow-step">
+              <i class="fas fa-check-circle text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Clean Output</p>
+            </div>
+          </div>
+          
+          <div class="tech-stack">
+            <span class="tech-tag">TensorFlow</span>
+            <span class="tech-tag">Keras</span>
+            <span class="tech-tag">NumPy</span>
+            <span class="tech-tag">Autoencoders</span>
+          </div>
+          <div class="mt-6 flex gap-3">
+            <button class="view-demo-btn bg-indigo-600 text-white px-4 py-2 rounded text-sm hover:bg-indigo-700 transition" data-project="2">
+              <i class="fas fa-eye mr-2"></i>View Demo
+            </button>
+            <a href="https://github.com/divakar618/convolutional-denoising-autoencoder" class="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm hover:bg-gray-700 transition flex items-center">
+              <i class="fab fa-github mr-2"></i> Source Code
+            </a>
+          </div>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="project-card glass p-6 rounded-xl">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-indigo-900 rounded-full flex items-center justify-center mr-3">
+              <i class="fas fa-heartbeat text-indigo-400 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Transfer-Learning for Classification</h3>
+          </div>
+          <p class="text-gray-300 mb-4">This helps in classifying images using transfer learning with InceptionV3 architecture. We make the top layer false to avoid it and set the activation function to sigmoid for binary classification.</p>
+          
+          <div class="flow-diagram">
+            <div class="flow-step">
+              <i class="fas fa-user-md text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Data for Training</p>
+            </div>
+            <div class="flow-connector">→</div>
+            
+            <div class="flow-step">
+              <i class="fas fa-cogs text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Pre-trained InceptionV3</p>
+            </div>
+            <div class="flow-connector">→</div>
+            
+            <div class="flow-step">
+              <i class="fas fa-chart-line text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Binary Classification</p>
+            </div>
+    
+            <div class="flow-connector">→</div>
+            <div class="flow-step">
+              <i class="fas fa-chart-line text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Plot Accuracy & Loss</p>
+            </div>
+          </div>
+          
+          <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Scikit-learn</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">XGBoost</span>
+          </div>
+          <div class="mt-6 flex gap-3">
+            <button class="view-demo-btn bg-indigo-600 text-white px-4 py-2 rounded text-sm hover:bg-indigo-700 transition" data-project="3">
+              <i class="fas fa-eye mr-2"></i>View Demo
+            </button>
+            <a href="https://github.com/divakar618/Transfer-Learning-for-binary-classification" class="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm hover:bg-gray-700 transition flex items-center">
+              <i class="fab fa-github mr-2"></i> Source Code
+            </a>
+          </div>
+        </div>
+        
+        <!-- Project 4 -->
+        <div class="project-card glass p-6 rounded-xl">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-indigo-900 rounded-full flex items-center justify-center mr-3">
+              <i class="fas fa-language text-indigo-400 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Edge-Linking with Hough Transform</h3>
+          </div>
+          <p class="text-gray-300 mb-4">Edge-Linking using Hough Transform enhances the continuity and structure of object boundaries in an image by combining edge detection with the Hough Transform.</p>
+          
+          <div class="flow-diagram">
+            <div class="flow-step">
+              <i class="fas fa-comments text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Image Acquisition</p>
+            </div>
+            <div class="flow-connector">→</div>
+            
+            <div class="flow-step">
+              <i class="fas fa-language text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Edge Detection</p>
+            </div>
+            <div class="flow-connector">→</div>
+            
+            <div class="flow-step">
+              <i class="fas fa-robot text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Hough Transform</p>
+            </div>
+            <div class="flow-connector">→</div>
+            
+            <div class="flow-step">
+              <i class="fas fa-smile text-indigo-400"></i>
+              <p class="text-sm mt-2 text-indigo-300">Edge Linking</p>
+            </div>
+          
+           <div class="flow-connector">→</div>
+           <div class="flow-step">
+             <i class="fas fa-smile text-indigo-400"></i>
+             <p class="text-sm mt-2 text-indigo-300">Visualization</p>
+           </div>
+          </div>
+
+          <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">OpenCV</span>
+            <span class="tech-tag">NumPy</span>
+            <span class="tech-tag">Image Processing</span>
+          </div>
+          <div class="mt-6 flex gap-3">
+            <button class="view-demo-btn bg-indigo-600 text-white px-4 py-2 rounded text-sm hover:bg-indigo-700 transition" data-project="4">
+              <i class="fas fa-eye mr-2"></i>View Demo
+            </button>
+            <a href="https://github.com/divakar618/Edge-Linking-using-Hough-Transformm" class="bg-gray-800 text-gray-200 px-4 py-2 rounded text-sm hover:bg-gray-700 transition flex items-center">
+              <i class="fab fa-github mr-2"></i> Source Code
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section-bg">
+    <div class="network-container" id="skills-network"></div>
+    <div class="max-w-6xl mx-auto px-4 text-center relative z-10 py-16">
+      <h2 class="section-title text-3xl font-bold text-indigo-400 mb-10">My Tech Toolkit</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+        <div class="group">
+          <div class="skill-icon w-20 h-20 mx-auto bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-3">
+            <i class="fab fa-python text-4xl text-blue-400"></i>
+          </div>
+          <p class="text-sm font-medium text-white group-hover:text-indigo-400">Python</p>
+          <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+            <div class="bg-indigo-600 h-2 rounded-full" style="width: 90%"></div>
+          </div>
+        </div>
+        
+        <div class="group">
+          <div class="skill-icon w-20 h-20 mx-auto bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-3">
+            <i class="fab fa-java text-4xl text-red-400"></i>
+          </div>
+          <p class="text-sm font-medium text-white group-hover:text-indigo-400">Java</p>
+          <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+            <div class="bg-indigo-600 h-2 rounded-full" style="width: 85%"></div>
+          </div>
+        </div>
+        
+        <div class="group">
+          <div class="skill-icon w-20 h-20 mx-auto bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-3">
+            <i class="fas fa-brain text-4xl text-orange-400"></i>
+          </div>
+          <p class="text-sm font-medium text-white group-hover:text-indigo-400">TensorFlow</p>
+          <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+            <div class="bg-indigo-600 h-2 rounded-full" style="width: 88%"></div>
+          </div>
+        </div>
+        
+        <div class="group">
+          <div class="skill-icon w-20 h-20 mx-auto bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-3">
+            <i class="fab fa-html5 text-4xl text-orange-400"></i>
+          </div>
+          <p class="text-sm font-medium text-white group-hover:text-indigo-400">HTML5</p>
+          <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+            <div class="bg-indigo-600 h-2 rounded-full" style="width: 80%"></div>
+          </div>
+        </div>
+        
+        <div class="group">
+          <div class="skill-icon w-20 h-20 mx-auto bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-3">
+            <i class="fab fa-css3-alt text-4xl text-blue-300"></i>
+          </div>
+          <p class="text-sm font-medium text-white group-hover:text-indigo-400">CSS3</p>
+          <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+            <div class="bg-indigo-600 h-2 rounded-full" style="width: 85%"></div>
+          </div>
+        </div>
+        
+        <div class="group">
+          <div class="skill-icon w-20 h-20 mx-auto bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-3">
+            <i class="fab fa-aws text-4xl text-orange-300"></i>
+          </div>
+          <p class="text-sm font-medium text-white group-hover:text-indigo-400">AWS</p>
+          <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+            <div class="bg-indigo-600 h-2 rounded-full" style="width: 75%"></div>
+          </div>
+        </div>
+        
+        <div class="group">
+          <div class="skill-icon w-20 h-20 mx-auto bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-3">
+            <i class="fas fa-database text-4xl text-blue-500"></i>
+          </div>
+          <p class="text-sm font-medium text-white group-hover:text-indigo-400">SQL</p>
+          <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+            <div class="bg-indigo-600 h-2 rounded-full" style="width: 82%"></div>
+          </div>
+        </div>
+        
+        <div class="group">
+          <div class="skill-icon w-20 h-20 mx-auto bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-3">
+            <i class="fab fa-git-alt text-4xl text-orange-400"></i>
+          </div>
+          <p class="text-sm font-medium text-white group-hover:text-indigo-400">Git</p>
+          <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+            <div class="bg-indigo-600 h-2 rounded-full" style="width: 87%"></div>
+          </div>
+        </div>
+        
+        <div class="group">
+          <div class="skill-icon w-20 h-20 mx-auto bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-3">
+            <i class="fas fa-chart-line text-4xl text-green-400"></i>
+          </div>
+          <p class="text-sm font-medium text-white group-hover:text-indigo-400">Data Analysis</p>
+          <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+            <div class="bg-indigo-600 h-2 rounded-full" style="width: 85%"></div>
+          </div>
+        </div>
+        
+        <div class="group">
+          <div class="skill-icon w-20 h-20 mx-auto bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-3">
+            <i class="fas fa-robot text-4xl text-purple-400"></i>
+          </div>
+          <p class="text-sm font-medium text-white group-hover:text-indigo-400">Deep Learning</p>
+          <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+            <div class="bg-indigo-600 h-2 rounded-full" style="width: 86%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section id="certificates" class="section-bg">
+    <div class="network-container" id="certificates-network"></div>
+    <div class="max-w-6xl mx-auto px-4 text-center relative z-10 py-16">
+      <h2 class="section-title text-3xl font-bold text-indigo-400 mb-10">Certificates & Achievements</h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Certificate 1 -->
+        <div class="certificate-card glass p-6 rounded-xl relative">
+          <div class="w-16 h-16 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-certificate text-2xl text-indigo-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Python for Data Science and ML</h3>
+          <p class="text-sm text-indigo-400">LinkedIn Learning</p>
+          <p class="text-indigo-300 mt-2">Issued: July 2024</p>
+          <p class="mt-3 text-gray-300 text-sm">
+            Covers Python essentials, ML algorithms, and real-world data science techniques.
+          </p>
+          <div class="mt-4">
+            <a href="#"
+               class="inline-block bg-indigo-900 text-indigo-300 px-4 py-2 rounded hover:bg-indigo-800 transition">
+              View Certificate
+            </a>
+          </div>
+        </div>
+
+        <!-- Certificate 2 -->
+        <div class="certificate-card glass p-6 rounded-xl relative">
+          <div class="w-16 h-16 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-certificate text-2xl text-indigo-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Google Data Analytics</h3>
+          <p class="text-sm text-indigo-400">Coursera</p>
+          <p class="text-indigo-300 mt-2">Issued: August 2025</p>
+          <p class="mt-3 text-gray-300 text-sm">
+            Hands-on learning with data cleaning, analysis, visualization, and business insights.
+          </p>
+          <div class="mt-4">
+            <a href="#"
+               class="inline-block bg-indigo-900 text-indigo-300 px-4 py-2 rounded hover:bg-indigo-800 transition">
+              View Certificate
+            </a>
+          </div>
+        </div>
+
+        <!-- Certificate 3 -->
+        <div class="certificate-card glass p-6 rounded-xl relative">
+          <div class="absolute top-0 right-0 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-bl">Verified</div>
+          <div class="w-16 h-16 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-certificate text-2xl text-indigo-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">AWS Cloud Practitioner</h3>
+          <p class="text-sm text-indigo-400">Amazon Web Services</p>
+          <p class="text-indigo-300 mt-2">Issued: January 2024</p>
+          <p class="mt-3 text-gray-300 text-sm">
+            Validates foundational cloud knowledge, AWS services, and support models.
+          </p>
+          <div class="mt-4">
+            <a href="#" class="inline-block bg-indigo-900 text-indigo-300 px-4 py-2 rounded hover:bg-indigo-800 transition">
+              View Credential
+            </a>
+          </div>
+        </div>
+        
+        <!-- Certificate 4 -->
+        <div class="certificate-card glass p-6 rounded-xl relative">
+          <div class="w-16 h-16 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-certificate text-2xl text-indigo-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Networking Basics</h3>
+          <p class="text-sm text-indigo-400">Cisco Networking Academy</p>
+          <p class="text-indigo-300 mt-2">Issued: July 2025</p>
+          <p class="mt-3 text-gray-300 text-sm">
+            Comprehensive foundation in computer networking concepts and protocols.
+          </p>
+          <div class="mt-4">    
+            <a href="#"
+               class="inline-block bg-indigo-900 text-indigo-300 px-4 py-2 rounded hover:bg-indigo-800 transition">
+              View Certificate
+            </a>
+          </div>
+        </div>
+
+        <!-- Certificate 5 -->
+        <div class="certificate-card glass p-6 rounded-xl relative">
+          <div class="w-16 h-16 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-certificate text-2xl text-indigo-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Introduction to IoT</h3>
+          <p class="text-sm text-indigo-400">NPTEL</p>
+          <p class="text-indigo-300 mt-2">Issued: July 2024</p>
+          <p class="mt-3 text-gray-300 text-sm">
+            Fundamentals of Internet of Things architecture and applications.
+          </p>
+          <div class="mt-4">    
+            <a href="#"
+               class="inline-block bg-indigo-900 text-indigo-300 px-4 py-2 rounded hover:bg-indigo-800 transition">
+              View Certificate
+            </a>
+          </div>
+        </div>
+
+        <!-- Certificate 6 -->
+        <div class="certificate-card glass p-6 rounded-xl relative">
+          <div class="w-16 h-16 bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-certificate text-2xl text-indigo-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Machine Learning with Python</h3>
+          <p class="text-sm text-indigo-400">edX</p>
+          <p class="text-indigo-300 mt-2">Issued: March 2025</p>
+          <p class="mt-3 text-gray-300 text-sm">
+            Comprehensive course on ML algorithms and model evaluation using Python.
+          </p>
+          <div class="mt-4">    
+            <a href="#"
+               class="inline-block bg-indigo-900 text-indigo-300 px-4 py-2 rounded hover:bg-indigo-800 transition">
+              View Certificate
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section-bg">
+    <div class="network-container" id="contact-network"></div>
+    <div class="max-w-3xl mx-auto px-4 relative z-10 py-16">
+      <h2 class="section-title text-3xl font-bold text-center text-indigo-400 mb-10">Get In Touch</h2>
+      <div class="glass p-8 rounded-xl">
+        <form class="contact-form space-y-6">
+          <div>
+            <label for="name" class="block text-gray-300 font-medium mb-2">Name</label>
+            <input type="text" id="name" class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Your name">
+          </div>
+          
+          <div>
+            <label for="email" class="block text-gray-300 font-medium mb-2">Email</label>
+            <input type="email" id="email" class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="your.email@example.com">
+          </div>
+          
+          <div>
+            <label for="subject" class="block text-gray-300 font-medium mb-2">Subject</label>
+            <input type="text" id="subject" class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="How can I help you?">
+          </div>
+          
+          <div>
+            <label for="message" class="block text-gray-300 font-medium mb-2">Message</label>
+            <textarea id="message" rows="5" class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Your message..."></textarea>
+          </div>
+          
+          <div>
+            <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+              <i class="fas fa-paper-plane mr-2"></i> Send Message
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-8 bg-indigo-900 text-white relative glass">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="flex justify-center space-x-6 mb-4">
+        <a href="mailto:divak5781117@gmail.com" class="text-white hover:text-indigo-300 transition">
+          <i class="fas fa-envelope text-xl"></i>
+        </a>
+        <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" class="text-white hover:text-indigo-300 transition">
+          <i class="fab fa-linkedin text-xl"></i>
+        </a>
+        <a href="https://github.com/divakar618" class="text-white hover:text-indigo-300 transition">
+          <i class="fab fa-github text-xl"></i>
+        </a>
+        <a href="#" class="text-white hover:text-indigo-300 transition">
+          <i class="fab fa-twitter text-xl"></i>
+        </a>
+      </div>
+      <p class="mb-2">&copy; 2025 Divakar R. Crafted with ❤</p>
+      <p class="text-indigo-300 text-sm">Aspiring Machine Learning Engineer</p>
+    </div>
+  </footer>
+
+  <!-- Theme Switch -->
+  <div class="theme-switch" id="theme-switch">
+    <i class="fas fa-sun text-white"></i>
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <div class="scroll-top" id="scroll-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Initialize particles.js
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 100, density: { enable: true, value_area: 800 } },
+        color: { value: "#6366f1" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2, random: true },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#6366f1",
+          opacity: 0.1,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1.5,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        }
+      },
+      retina_detect: true
+    });
+    
+    // Create network backgrounds for each section
+    function createNetworkBackground(containerId, nodeCount = 20) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      
+      // Create nodes
+      for (let i = 0; i < nodeCount; i++) {
+        const node = document.createElement('div');
+        node.className = 'network-node';
+        node.style.width = ${Math.random() * 10 + 5}px;
+        node.style.height = node.style.width;
+        node.style.left = ${Math.random() * 100}%;
+        node.style.top = ${Math.random() * 100}%;
+        node.style.animation = node-float ${Math.random() * 10 + 10}s infinite ease-in-out;
+        node.style.animationDelay = ${Math.random() * 5}s;
+        container.appendChild(node);
+      }
+      
+      // Create connections
+      const nodes = container.querySelectorAll('.network-node');
+      nodes.forEach(node1 => {
+        nodes.forEach(node2 => {
+          if (node1 === node2) return;
+          
+          const x1 = parseFloat(node1.style.left) / 100 * width + parseFloat(node1.style.width) / 2;
+          const y1 = parseFloat(node1.style.top) / 100 * height + parseFloat(node1.style.height) / 2;
+          const x2 = parseFloat(node2.style.left) / 100 * width + parseFloat(node2.style.width) / 2;
+          const y2 = parseFloat(node2.style.top) / 100 * height + parseFloat(node2.style.height) / 2;
+          
+          const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+          
+          if (distance < 300) {
+            const line = document.createElement('div');
+            line.className = 'network-line';
+            line.style.width = ${distance}px;
+            line.style.height = '1px';
+            line.style.left = ${x1}px;
+            line.style.top = ${y1}px;
+            
+            const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+            line.style.transform = rotate(${angle}deg);
+            
+            container.appendChild(line);
+          }
+        });
+      });
+    }
+    
+    // Add animations on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      // Create network backgrounds
+      createNetworkBackground('hero-network', 15);
+      createNetworkBackground('about-network', 12);
+      createNetworkBackground('education-network', 10);
+      createNetworkBackground('internship-network', 8);
+      createNetworkBackground('projects-network', 18);
+      createNetworkBackground('skills-network', 20);
+      createNetworkBackground('certificates-network', 15);
+      createNetworkBackground('contact-network', 10);
+      
+      const animatedElements = document.querySelectorAll('.animated-element');
+      
+      // Function to check if element is in viewport
+      function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.bottom >= 0
+        );
+      }
+      
+      // Function to handle scroll event
+      function handleScroll() {
+        animatedElements.forEach(element => {
+          if (isInViewport(element)) {
+            element.classList.add('fade-in');
+          }
+        });
+        
+        // Show/hide scroll to top button
+        const scrollTopBtn = document.getElementById('scroll-top');
+        if (window.pageYOffset > 300) {
+          scrollTopBtn.classList.add('visible');
+        } else {
+          scrollTopBtn.classList.remove('visible');
+        }
+      }
+      
+      // Add scroll event listener
+      window.addEventListener('scroll', handleScroll);
+      
+      // Trigger once on load
+      handleScroll();
+      
+      // Theme switcher
+      const themeSwitch = document.getElementById('theme-switch');
+      const body = document.body;
+      
+      themeSwitch.addEventListener('click', function() {
+        body.classList.toggle('light-mode');
+        const icon = themeSwitch.querySelector('i');
+        
+        if (body.classList.contains('light-mode')) {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+        } else {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+        }
+      });
+      
+      // Scroll to top function
+      const scrollTopBtn = document.getElementById('scroll-top');
+      scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        });
+      });
+      
+      // Form submission
+      const contactForm = document.querySelector('.contact-form');
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+      });
+    });
+  </script>
+</body>
+</html>
